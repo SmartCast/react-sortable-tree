@@ -46,42 +46,18 @@
         /******/ __webpack_require__.d = function(exports, name, getter) {
             /******/ __webpack_require__.o(exports, name) || 
             /******/ Object.defineProperty(exports, name, {
-                enumerable: !0,
-                get: getter
-            })
+                /******/ configurable: !1,
+                /******/ enumerable: !0,
+                /******/ get: getter
+                /******/            })
             /******/;
         }, 
         /******/
         /******/ // define __esModule on exports
         /******/ __webpack_require__.r = function(exports) {
-            /******/ "undefined" != typeof Symbol && Symbol.toStringTag && 
-            /******/ Object.defineProperty(exports, Symbol.toStringTag, {
-                value: "Module"
-            })
-            /******/ , Object.defineProperty(exports, "__esModule", {
+            /******/ Object.defineProperty(exports, "__esModule", {
                 value: !0
             });
-        }, 
-        /******/
-        /******/ // create a fake namespace object
-        /******/ // mode & 1: value is a module id, require it
-        /******/ // mode & 2: merge all properties of value into the ns
-        /******/ // mode & 4: return value when already ns object
-        /******/ // mode & 8|1: behave like require
-        /******/ __webpack_require__.t = function(value, mode) {
-            /******/ if (
-            /******/ 1 & mode && (value = __webpack_require__(value)), 8 & mode) return value;
-            /******/            if (4 & mode && "object" == typeof value && value && value.__esModule) return value;
-            /******/            var ns = Object.create(null);
-            /******/            
-            /******/ if (__webpack_require__.r(ns), 
-            /******/ Object.defineProperty(ns, "default", {
-                enumerable: !0,
-                value: value
-            }), 2 & mode && "string" != typeof value) for (var key in value) __webpack_require__.d(ns, key, function(key) {
-                return value[key];
-            }.bind(null, key));
-            /******/            return ns;
             /******/        }, 
         /******/
         /******/ // getDefaultExport function for compatibility with non-harmony modules
@@ -1845,7 +1821,7 @@
                             canDrop: canDrop,
                             draggedNode: draggedNode
                         });
-                    }))));
+                    }), " ")));
                 }
             } ]), TreeNode;
         }();
@@ -2319,12 +2295,17 @@
                             // Redraw if hovered above different nodes
                             dropTargetProps.node !== draggedNode || 
                             // Or hovered above the same node but at a different depth
-                            targetDepth !== dropTargetProps.path.length - 1) && _this2.dragHover({
+                            targetDepth !== dropTargetProps.path.length - 1) && (null === dropTargetProps.swapFrom ? _this2.dragHover({
+                                node: draggedNode,
+                                path: monitor.getItem().path,
+                                minimumTreeIndex: dropTargetProps.listIndex + 1,
+                                depth: targetDepth
+                            }) : _this2.dragHover({
                                 node: draggedNode,
                                 path: monitor.getItem().path,
                                 minimumTreeIndex: dropTargetProps.listIndex,
                                 depth: targetDepth
-                            });
+                            }));
                         },
                         canDrop: this.canDrop.bind(this)
                     };

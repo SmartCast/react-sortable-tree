@@ -242,12 +242,22 @@ export default class DndManager {
           return;
         }
 
-        this.dragHover({
-          node: draggedNode,
-          path: monitor.getItem().path,
-          minimumTreeIndex: dropTargetProps.listIndex,
-          depth: targetDepth,
-        });
+          if (dropTargetProps.swapFrom === null) {
+              this.dragHover({
+                  node: draggedNode,
+                  path: monitor.getItem().path,
+                  minimumTreeIndex: dropTargetProps.listIndex +1 ,
+                  depth: targetDepth,
+              });
+          }
+          else {
+              this.dragHover({
+                  node: draggedNode,
+                  path: monitor.getItem().path,
+                  minimumTreeIndex: dropTargetProps.listIndex,
+                  depth: targetDepth,
+              });
+          }
       },
 
       canDrop: this.canDrop.bind(this),
